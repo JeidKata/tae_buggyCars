@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="example test Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.aviatur.buggy_car.listeners.Listeners"/>
+    </listeners>
+    <test name="Test">
+        <parameter name="username" value="TestPrueba"/>
+        <parameter name="firstname" value="Test"/>
+        <parameter name="lastname" value="Prueba"/>
+        <parameter name="password" value="123tesT654#"/>
+        <parameter name="confirmPassword" value="123tesT654#"/>
+        <classes>
+            <class name="com.aviatur.buggy_car.test.RegisterTest"/>
+        </classes>
+    </test>
+</suite>
