@@ -24,7 +24,7 @@ public class RegisterPage extends BasePage {
     @FindBy(className = "btn-default")
     private WebElement btnRegister;
 
-    @FindBy(className = "result alert alert-danger")
+    @FindBy(className = "alert-danger")
     private WebElement msgAlert;
 
     public RegisterPage(WebDriver driver){
@@ -66,11 +66,19 @@ public class RegisterPage extends BasePage {
         return !btnRegister.isEnabled();
     }
 
-    public void getMsgAlert(){
-        if (msgAlert.isEnabled()){
-            logs.info("Aparece mensaje error de contraseña.");
-        }else{
-            logs.info("No hay mensaje de error por contraseña.");
+    public boolean getMsgAlert(){
+        try {
+            return msgAlert.isDisplayed();
+        } catch (Exception e) {
+            return false;
         }
+    }
+
+    public void triggerAllRequiredErrors(){
+        touchFieldAndLeaveEmpty(txtUsername);
+        touchFieldAndLeaveEmpty(txtFirstName);
+        touchFieldAndLeaveEmpty(txtLastName);
+        touchFieldAndLeaveEmpty(txtPassword);
+        touchFieldAndLeaveEmpty(txtConfirmPassword);
     }
 }

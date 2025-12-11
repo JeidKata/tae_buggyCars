@@ -1,6 +1,7 @@
 package com.aviatur.buggy_car.pages;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.Logger;
@@ -61,6 +62,23 @@ public class BasePage {
             element.sendKeys(text);
         } catch (Exception e) {
             System.out.println("No se pudo escribir en el elemento: " + locator);
+        }
+    }
+
+    /**
+     * Metodo para dar click, escribir y borrar.
+     */
+    public void touchFieldAndLeaveEmpty(WebElement locator) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOf(locator));
+
+            element.click();             // 1. Entrar al campo
+            element.sendKeys(" ");       // 2. Escribir un espacio (ensuciar el campo)
+            element.sendKeys(Keys.BACK_SPACE); // 3. Borrar el espacio
+            element.sendKeys(Keys.TAB);  // 4. Salir del campo (perder el foco)
+
+        } catch (Exception e) {
+            System.out.println("No se pudo interactuar con el campo: " + e.getMessage());
         }
     }
 }
