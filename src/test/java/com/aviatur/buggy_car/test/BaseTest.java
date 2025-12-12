@@ -1,19 +1,19 @@
 package com.aviatur.buggy_car.test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import java.time.Duration;
 
-
+@Listeners(com.aviatur.buggy_car.listeners.Listeners.class)
 public class BaseTest {
     private static final String URL = "https://buggy.justtestit.org/";
     protected WebDriver driver;
@@ -26,7 +26,6 @@ public class BaseTest {
 
     @BeforeSuite
     public void setupWebDriverManager(){
-        WebDriverManager.chromedriver().setup();
         logger.info("WebDriverManager configurado para Chrome.");
     }
 
@@ -34,11 +33,10 @@ public class BaseTest {
     public void setup(){
         logger.info("Inicia la configuración de la prueba...");
         logger.info("Configuración del entorno de prueba.");
-        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--desactivar--extensiones");
+        options.addArguments("--disable-extensions");
 
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get(URL);
