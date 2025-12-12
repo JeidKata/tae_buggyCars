@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Configuración de la Consola (SYSTEM_OUT) -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- Patrón de diseño del mensaje: Hora - Nivel - Clase - Mensaje -->
+            <!-- %highlight{} pone colores automáticos según si es INFO, WARN o ERROR -->
+            <PatternLayout pattern="%d{HH:mm:ss} %highlight{%-5level} %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Nivel global: INFO (Muestra Info, Warn, Error, Fatal) -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
