@@ -37,6 +37,16 @@ public class RegisterTest extends BaseTest{
                 register.triggerAllRequiredErrors();
                 Assert.assertTrue(register.getMsgAlert(), "Debe mostrar mensajes de validación en todos los campos vacíos.");
                 break;
+
+            case "Password corta":
+            register.clickRegister();
+            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidParameter: 1 validation error(s) found. - minimum field size of 6, SignUpInput.Password'.");
+            break;
+
+            case "Password minimo 6":
+            register.clickRegister();
+            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidParameter'.");
+            break;
         }
     }
 }

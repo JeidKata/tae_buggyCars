@@ -30,6 +30,8 @@ public class RegisterPage extends BasePage {
     @FindBy(className = "alert-danger")
     private List<WebElement> msgAlert;
 
+    @FindBy(className = "result")
+    private WebElement invalidParameter;
 
     public RegisterPage(WebDriver driver){
         super(driver);
@@ -74,5 +76,14 @@ public class RegisterPage extends BasePage {
         touchFieldAndLeaveEmpty(txtLastName);
         touchFieldAndLeaveEmpty(txtPassword);
         touchFieldAndLeaveEmpty(txtConfirmPassword);
+    }
+
+    public boolean isMsgAlertDisplayed(){
+        try{
+            wait.until(ExpectedConditions.visibilityOf(invalidParameter));
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
