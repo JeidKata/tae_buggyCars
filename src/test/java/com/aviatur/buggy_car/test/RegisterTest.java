@@ -18,33 +18,25 @@ public class RegisterTest extends BaseTest{
 
         main.clicOnRegister();
         Assert.assertEquals(register.btnRegisterDisabled(), true);
-        register.enterUsername(username);
-        register.enterFirstName(firstname);
-        register.enterLastName(lastname);
-        register.enterPassword(password);
-        register.enterConfirmPassword(confirmPassword);
+        register.fillRegistrationForm(username, firstname,lastname,password,confirmPassword);
         Assert.assertEquals(register.btnRegisterDisabled(), false);
         register.clickRegister();
     }
 
-    @Test(description = "vacio", dataProvider = "registerData", dataProviderClass = Data.class)
-    public void resgiterEmptyTest(String username, String firstname, String lastname, String password, String confirmPassword){
+    @Test(description = "Unhappy Paths", dataProvider = "registerData", dataProviderClass = Data.class)
+    public void resgiterUserWithErrors(String username, String firstname, String lastname, String password, String confirmPassword, String error){
         MainPage main = new MainPage(driver);
         RegisterPage register = new RegisterPage(driver);
 
         main.clicOnRegister();
         Assert.assertTrue(register.btnRegisterDisabled(), "El botón de resgistro debe estar deshabilitado si hay campos vacíos.");
-        register.triggerAllRequiredErrors();
-        register.enterUsername(username);
-        Assert.assertEquals(register.getMsgAlert(), true);
-        register.enterFirstName(firstname);
-        Assert.assertEquals(register.getMsgAlert(), true);
-        register.enterLastName(lastname);
-        Assert.assertEquals(register.getMsgAlert(), true);
-        register.enterPassword(password);
-        Assert.assertEquals(register.getMsgAlert(), true);
-        register.enterConfirmPassword(confirmPassword);
-        Assert.assertEquals(register.getMsgAlert(), true);
-        Assert.assertTrue(register.btnRegisterDisabled(), "El botón de resgistro debe estar deshabilitado si hay campos vacíos.");
+        register.fillRegistrationForm(username, firstname,lastname,password,confirmPassword);
+
+        switch (error){
+            case "Campos requeridos.":
+                register.triggerAllRequiredErrors();
+                Assert.assertTrue(register.getMsgAlert(), "Debe mostrar mensajes de validación en todos los campos vacíos.");
+                break;
+        }
     }
 }

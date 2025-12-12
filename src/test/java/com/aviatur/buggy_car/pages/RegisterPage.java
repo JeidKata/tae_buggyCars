@@ -3,6 +3,9 @@ package com.aviatur.buggy_car.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class RegisterPage extends BasePage {
 
@@ -25,7 +28,8 @@ public class RegisterPage extends BasePage {
     private WebElement btnRegister;
 
     @FindBy(className = "alert-danger")
-    private WebElement msgAlert;
+    private List<WebElement> msgAlert;
+
 
     public RegisterPage(WebDriver driver){
         super(driver);
@@ -34,27 +38,11 @@ public class RegisterPage extends BasePage {
     /**
      * Aquí empiezan los metodos del registro
      */
-    public void enterUsername(String username){
+    public void fillRegistrationForm(String username, String firstname, String lastname, String password, String confirmPassword){
         writeText(txtUsername, username);
-    }
-
-    public void enterFirstName(String firstname){
         writeText(txtFirstName, firstname);
-    }
-
-    public void enterLastName(String lastname){
         writeText(txtLastName, lastname);
-    }
-
-    public void enterPassword(String password) {
-        if (password.length() >= 6){
-            writeText(txtPassword, password);
-        }else {
-            getMsgAlert();
-        }
-    }
-
-    public void enterConfirmPassword(String confirmPassword){
+        writeText(txtPassword, password);
         writeText(txtConfirmPassword, confirmPassword);
     }
 
@@ -67,9 +55,15 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean getMsgAlert(){
-        try {
-            return msgAlert.isDisplayed();
-        } catch (Exception e) {
+        try{
+            for (WebElement alerta : msgAlert) {
+                if (alerta.isDisplayed()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (Exception e){
             return false;
         }
     }
