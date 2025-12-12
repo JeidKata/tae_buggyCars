@@ -16,24 +16,24 @@ buggyCars
 ├── .gitignore                                         # Archivos y carpetas a ignorar por Git
 ├── pom.xml                                            # Configuración del proyecto Maven y dependencias
 ├── testng.xml                                         # Aquí se aplica todos los test de la suite.
-└── src
-    ├── main
-    └── test
-        └── java
-        │    └── com
-        │         └── aviatur
-        │              └── buggy_cars
+└── 📂src
+    ├── 📂main
+    └── 📂test
+        └── 📂java
+        │    └── 📂com
+        │         └── 📂aviatur
+        │              └── 📂buggy_cars
         │                  ├── data                    # Clases para la gestión de datos de prueba
-        │                  │   └── Data.java
+        │                  │   └──  📄Data.java
         │                  ├── listeners               # Clases de TestNG Listeners para monitoreo y reporte de pruebas
-        │                  │   └── Listeners.java
+        │                  │   └──  📄Listeners.java
         │                  ├── pages                   # Clases de Page Objects que modelan las páginas de la UI
-        │                  │   ├── BasePage.java
-        │                  │   ├── MainPage.java
-        │                  │   └── RegisterPage.java
+        │                  │   ├──  📄BasePage.java
+        │                  │   ├──  📄MainPage.java
+        │                  │   └──  📄RegisterPage.java
         │                  └── tests                   # Clases que contienen los métodos de prueba (@Test)
-        │                      ├── BaseTest.java
-        │                      └── RegisterTest.java
+        │                      ├──  📄BaseTest.java
+        │                      └──  📄RegisterTest.java
         └── resources
                 └── log4j2.xml
 ```
