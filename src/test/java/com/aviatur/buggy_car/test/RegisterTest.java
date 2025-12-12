@@ -47,6 +47,22 @@ public class RegisterTest extends BaseTest{
             register.clickRegister();
             Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidParameter'.");
             break;
+
+            case "No cumple condiciones":
+            register.clickRegister();
+            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidPasswordException: La contraseña no cumple con la política: la contraseña debe contener caracteres en mayúscula.'");
+            break;
+
+            case "No coinciden":
+            Assert.assertTrue(register.getMsgAlert(), "Debe mostrar mensaje: 'Constraseñas no coinciden'.");
+            Assert.assertEquals(register.btnRegisterDisabled(), true);
+            break;
+
+            case "Ya existe usuario":
+            register.clickRegister();
+            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'UsernameExistsException: El usuario ya existe'.");
+            Assert.assertEquals(register.btnRegisterDisabled(), false);
+            break;
         }
     }
 }
