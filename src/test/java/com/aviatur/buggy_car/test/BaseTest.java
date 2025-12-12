@@ -46,13 +46,13 @@ public class BaseTest {
     /*
      * Cierra el navegador después de cada metodo de prueba.
      */
-//    @AfterMethod
-//    public void teardown(){
-//        if (driver != null){
-//            driver.quit();
-//            logger.info("Navegador cerrado.");
-//        }
-//        logger.info("Configuración del test completado.");
-//    }
+    @AfterMethod
+    public void teardown(){
+        if (driver != null){
+            driver.quit();
+            logger.info("Navegador cerrado.");
+        }
+        logger.info("Configuración del test completado.");
+    }
 
 }
