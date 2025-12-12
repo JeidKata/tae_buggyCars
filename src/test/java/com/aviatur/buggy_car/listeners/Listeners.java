@@ -1,12 +1,13 @@
 package com.aviatur.buggy_car.listeners;
 
-import org.testng.log4testng.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestListener;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 
-public class Listeners implements ITestListener{
-    public Logger logs = Logger.getLogger(Listeners.class);
+public class Listeners implements ITestListener {
+    public Logger logs = LogManager.getLogger(Listeners.class);
 
     @Override
     public void onTestStart(ITestResult result) {
@@ -22,13 +23,13 @@ public class Listeners implements ITestListener{
 
     @Override
     public void onTestFailure(ITestResult result) {
-        logs.info("Test Fallido ❌ " + result.getName());
+        logs.error("Test Fallido ❌ " + result.getName());
 
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        logs.info("Test Ignorado ⏭\uFE0F " + result.getName());
+        logs.warn("Test Ignorado ⏭\uFE0F " + result.getName());
 
     }
 
@@ -41,13 +42,13 @@ public class Listeners implements ITestListener{
 
     @Override
     public void onStart(ITestContext context) {
-        logs.info("--- INICIA TEST " + context.getName());
+        logs.info("--- \uD83C\uDFC1 INICIA TEST " + context.getName());
 
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        logs.info("--- FINALIZA TEST " + context.getName());
+        logs.info("--- \uD83C\uDFC1 FINALIZA TEST " + context.getName());
 
     }
 }
