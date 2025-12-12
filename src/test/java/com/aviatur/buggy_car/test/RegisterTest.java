@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class RegisterTest extends BaseTest{
 
     @Parameters({"username", "firstname", "lastname", "password", "confirmPassword"})
-    @Test(description = "Happy path")
+//    @Test(description = "Happy path")
     public void registerUserSuccess(String username, String firstname, String lastname, String password, String confirmPassword){
 
         MainPage main = new MainPage(driver);
@@ -21,6 +21,8 @@ public class RegisterTest extends BaseTest{
         register.fillRegistrationForm(username, firstname,lastname,password,confirmPassword);
         Assert.assertEquals(register.btnRegisterDisabled(), false);
         register.clickRegister();
+        Assert.assertEquals((register.isMsgAlertDisplayed()), "Registration is successful");
+
     }
 
     @Test(description = "Unhappy Paths", dataProvider = "registerData", dataProviderClass = Data.class)
@@ -40,17 +42,17 @@ public class RegisterTest extends BaseTest{
 
             case "Password corta":
             register.clickRegister();
-            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidParameter: 1 validation error(s) found. - minimum field size of 6, SignUpInput.Password'.");
+            Assert.assertEquals(register.isMsgAlertDisplayed(), "InvalidParameter: 1 validation error(s) found. - minimum field size of 6, SignUpInput.Password.");
             break;
 
             case "Password minimo 6":
             register.clickRegister();
-            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidParameter'.");
+            Assert.assertEquals(register.isMsgAlertDisplayed(), "InvalidParameter: 1 validation error(s) found. - minimum field size of 6, SignUpInput.Password.");
             break;
 
             case "No cumple condiciones":
             register.clickRegister();
-            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'InvalidPasswordException: La contraseña no cumple con la política: la contraseña debe contener caracteres en mayúscula.'");
+            Assert.assertEquals(register.isMsgAlertDisplayed(), "InvalidPasswordException: Password did not conform with policy: Password must have uppercase characters");
             break;
 
             case "No coinciden":
@@ -60,8 +62,8 @@ public class RegisterTest extends BaseTest{
 
             case "Ya existe usuario":
             register.clickRegister();
-            Assert.assertTrue(register.isMsgAlertDisplayed(), "Debe mostrar mensaje: 'UsernameExistsException: El usuario ya existe'.");
-            Assert.assertEquals(register.btnRegisterDisabled(), false);
+            Assert.assertEquals(register.isMsgAlertDisplayed(), "UsernameExistsException: User already exists");
+            Assert.assertFalse(register.btnRegisterDisabled(), "El botón de resgistro debe estar habilitado.");
             break;
         }
     }

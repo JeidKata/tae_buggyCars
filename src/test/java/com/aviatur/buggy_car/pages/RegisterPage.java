@@ -78,12 +78,13 @@ public class RegisterPage extends BasePage {
         touchFieldAndLeaveEmpty(txtConfirmPassword);
     }
 
-    public boolean isMsgAlertDisplayed(){
+    public String isMsgAlertDisplayed(){
         try{
             wait.until(ExpectedConditions.visibilityOf(invalidParameter));
-            return true;
+            String text = invalidParameter.getText();
+            return text;
         }catch (Exception e){
-            return false;
+            return "Error" + e;
         }
     }
 }
