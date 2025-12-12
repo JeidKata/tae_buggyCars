@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class RegisterTest extends BaseTest{
 
     @Parameters({"username", "firstname", "lastname", "password", "confirmPassword"})
-//    @Test(description = "Happy path")
+    @Test(description = "Happy path")
     public void registerUserSuccess(String username, String firstname, String lastname, String password, String confirmPassword){
 
         MainPage main = new MainPage(driver);
